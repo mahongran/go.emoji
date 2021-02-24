@@ -2469,6 +2469,18 @@ func initAllSequences() {
 	AllSequences.AddSequence([]rune{0x0037, 0xfe0f, 0x20e3}, "Emoji_Keycap_Sequence         ==> 7️⃣")
 	AllSequences.AddSequence([]rune{0x0038, 0xfe0f, 0x20e3}, "Emoji_Keycap_Sequence         ==> 8️⃣")
 	AllSequences.AddSequence([]rune{0x0039, 0xfe0f, 0x20e3}, "Emoji_Keycap_Sequence         ==> 9️⃣")
+	AllSequences.AddSequence([]rune{0x0023, 0x20e3, 0xfe0f}, "Emoji_Keycap_Sequence         ==> #️⃣")
+	AllSequences.AddSequence([]rune{0x002a, 0x20e3, 0xfe0f}, "Emoji_Keycap_Sequence         ==> *️⃣")
+	AllSequences.AddSequence([]rune{0x0030, 0x20e3, 0xfe0f}, "Emoji_Keycap_Sequence         ==> 0️⃣")
+	AllSequences.AddSequence([]rune{0x0031, 0x20e3, 0xfe0f}, "Emoji_Keycap_Sequence         ==> 1⃣️")
+	AllSequences.AddSequence([]rune{0x0032, 0x20e3, 0xfe0f}, "Emoji_Keycap_Sequence         ==> 2⃣️")
+	AllSequences.AddSequence([]rune{0x0033, 0x20e3, 0xfe0f}, "Emoji_Keycap_Sequence         ==> 3⃣️")
+	AllSequences.AddSequence([]rune{0x0034, 0x20e3, 0xfe0f}, "Emoji_Keycap_Sequence         ==> 4⃣️")
+	AllSequences.AddSequence([]rune{0x0035, 0x20e3, 0xfe0f}, "Emoji_Keycap_Sequence         ==> 5⃣️")
+	AllSequences.AddSequence([]rune{0x0036, 0x20e3, 0xfe0f}, "Emoji_Keycap_Sequence         ==> 6⃣️")
+	AllSequences.AddSequence([]rune{0x0037, 0x20e3, 0xfe0f}, "Emoji_Keycap_Sequence         ==> 7⃣️")
+	AllSequences.AddSequence([]rune{0x0038, 0x20e3, 0xfe0f}, "Emoji_Keycap_Sequence         ==> 8⃣️")
+	AllSequences.AddSequence([]rune{0x0039, 0x20e3, 0xfe0f}, "Emoji_Keycap_Sequence         ==> 9⃣️")
 	AllSequences.AddSequence([]rune{0x1f1e6, 0x1f1e8}, "RGI_Emoji_Flag_Sequence       ==> 🇦🇨")
 	AllSequences.AddSequence([]rune{0x1f1e6, 0x1f1e9}, "RGI_Emoji_Flag_Sequence       ==> 🇦🇩")
 	AllSequences.AddSequence([]rune{0x1f1e6, 0x1f1ea}, "RGI_Emoji_Flag_Sequence       ==> 🇦🇪")
@@ -4650,4 +4662,3 @@ func initAllSequences() {
 	AllSequences.AddSequence([]rune{0x1f636, 0x200d, 0x1f32b, 0xfe0f}, "RGI_Emoji_ZWJ_Sequence   ==> 😶‍🌫️")
 	AllSequences.AddSequence([]rune{0x1f9d1, 0x200d, 0x1f384}, "RGI_Emoji_ZWJ_Sequence   ==> 🧑‍🎄")
 }
-
