@@ -3,7 +3,7 @@ package emoji_test
 import (
 	"fmt"
 
-	emoji "github.com/Andrew-M-C/go.emoji"
+	emoji "github.com/go-xman/go.emoji"
 )
 
 func ExampleReplaceAllEmojiFunc() {

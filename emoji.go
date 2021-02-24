@@ -7,7 +7,7 @@ package emoji
 import (
 	"bytes"
 
-	"github.com/Andrew-M-C/go.emoji/official"
+	"github.com/go-xman/go.emoji/official"
 )
 
 // ReplaceAllEmojiFunc searches string and find all emojis.
