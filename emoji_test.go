@@ -3,10 +3,10 @@ package emoji
 import (
 	"bytes"
 	"fmt"
+	"strings"
 	"testing"
 )
 
-// reference: https://www.jianshu.com/p/9682f8ce1260
 func TestUnicode(t *testing.T) {
 	printf := t.Logf
 	buff := bytes.Buffer{}
@@ -83,17 +83,160 @@ func TestUnicode(t *testing.T) {
 	buff.Reset()
 }
 
-func TestReplace(t *testing.T) {
+func TestReplaceAllEmojiFunc(t *testing.T) {
 	printf := t.Logf
 
 	s := "👩‍👩‍👦🇨🇳"
 	i := 0
 
-	final := ReplaceAllEmojiFunc(s, func(emoji string) string {
+	final := replaceAllEmojiFunc(s, func(emoji string) string {
 		i++
 		printf("%02d - %s - len %d", i, emoji, len(emoji))
 		return fmt.Sprintf("%d-", i)
 	})
 
 	printf("final: <%s>", final)
+}
+
+/*
+goos: darwin
+goarch: amd64
+pkg: github.com/go-xman/go.emoji
+BenchmarkReplaceAllEmojiFunc
+BenchmarkReplaceAllEmojiFunc-8   	   14910	     79685 ns/op
+PASS
+*/
+func BenchmarkReplaceAllEmojiFunc(b *testing.B) {
+	s := "👩‍👩‍👦🇨🇳" + strings.Repeat("abc", 1000)
+	for i := 0; i < b.N; i++ {
+		_ = replaceAllEmojiFunc(s, func(emoji string) string {
+			return ""
+		})
+	}
+}
+
+func TestHasEmoji(t *testing.T) {
+	tests := []struct {
+		name string
+		s    string
+		want bool
+	}{
+		{
+			s:    "一",
+			want: false,
+		},
+		{
+			s:    "1⃣️",
+			want: true,
+		},
+		{
+			s:    "👩‍👩‍👦",
+			want: true,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := HasEmoji(tt.s); got != tt.want {
+				t.Errorf("HasEmoji() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestFilterEmoji(t *testing.T) {
+	tests := []struct {
+		name string
+		s    string
+		want string
+	}{
+		{
+			s:    "1⃣️",
+			want: "",
+		},
+		{
+			s:    "1⃣️23",
+			want: "23",
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := FilterEmoji(tt.s); got != tt.want {
+				t.Errorf("FilterEmoji() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestReplaceEmoji(t *testing.T) {
+	type args struct {
+		s string
+		f func(emoji string) string
+	}
+	tests := []struct {
+		name string
+		args args
+		want string
+	}{
+		{
+			args: args{
+				s: "1⃣️234⃣️",
+				f: func(emoji string) string {
+					return "#"
+				},
+			},
+			want: "#23#",
+		},
+		{
+			args: args{
+				s: "1⃣️234⃣️",
+				f: func(emoji string) string {
+					if emoji == "1⃣️" {
+						return "1"
+					} else {
+						return ""
+					}
+				},
+			},
+			want: "123",
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := ReplaceEmoji(tt.args.s, tt.args.f); got != tt.want {
+				t.Errorf("ReplaceEmoji() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestHumanReadLen(t *testing.T) {
+	tests := []struct {
+		name string
+		s    string
+		want int
+	}{
+		{
+			s:    "123",
+			want: 3,
+		},
+		{
+			s:    "1⃣️23",
+			want: 3,
+		},
+		{
+			s:    "👩‍👩‍👦🇨🇳3",
+			want: 3,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := HumanReadLen(tt.s); got != tt.want {
+				t.Errorf("HumanReadLen() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestDump(t *testing.T) {
+	Dump("👨‍👩‍👧‍👦")
 }
