@@ -1,3 +1,3 @@
-module github.com/go-xman/go.emoji
+module github.com/mahongran/go.emoji
 
 go 1.12
